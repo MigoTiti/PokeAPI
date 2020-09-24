@@ -16,9 +16,9 @@ import org.koin.core.parameter.parametersOf
 
 abstract class BaseActivity<T : ViewDataBinding, R : ViewModel> : AppCompatActivity() {
 
-    protected val alertService by inject<AlertService> { parametersOf(this as Activity) }
-    protected val resourceService by inject<ResourceService> { parametersOf(this as Activity) }
-    protected val navigationService by inject<NavigationService> { parametersOf(this as Activity) }
+    val alertService by inject<AlertService> { parametersOf(this as Activity) }
+    val resourceService by inject<ResourceService> { parametersOf(this as Activity) }
+    val navigationService by inject<NavigationService> { parametersOf(this as Activity) }
 
     abstract val viewModel: R
     abstract val layoutId: Int

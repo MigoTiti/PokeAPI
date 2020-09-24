@@ -1,5 +1,6 @@
 package com.lucasrodrigues.pokemonshowcase
 
+import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
 import com.lucasrodrigues.pokemonshowcase.model.Pokemon
 import com.lucasrodrigues.pokemonshowcase.webservice.PokemonWebservice
@@ -48,7 +49,8 @@ class PokemonWebserviceTestUnitTests : KoinTest {
 
         val pagedList: PagedPokemonList = pokemonWebservice.fetchAllPokemon(
 			offset = 0,
-			pageSize = pageSize
+			pageSize = pageSize,
+            generation = Generation.I
 		)
 
         assertEquals(null, pagedList.previousOffset)
@@ -60,7 +62,8 @@ class PokemonWebserviceTestUnitTests : KoinTest {
     fun fetches_pokemonListLastPageCorrectly() = runBlockingTest {
         val pagedList: PagedPokemonList = pokemonWebservice.fetchAllPokemon(
 			offset = 140,
-			pageSize = 20
+			pageSize = 20,
+            generation = Generation.I
 		)
 
         assertEquals(120, pagedList.previousOffset)

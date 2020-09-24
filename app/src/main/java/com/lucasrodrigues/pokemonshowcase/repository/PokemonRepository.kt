@@ -6,6 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.lucasrodrigues.pokemonshowcase.components.PokemonRemoteMediator
+import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.PokemonDao
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
@@ -27,21 +28,30 @@ class PokemonRepository(
     }
 
     fun allPokemonPagedList(
-        remoteKeysRepository: RemoteKeysRepository
+        remoteKeysRepository: RemoteKeysRepository,
+        generation: Generation
     ): Flow<PagingData<DisplayPokemon>> {
         return Pager(
             config = PagingConfig(pageSize = 20),
             remoteMediator = PokemonRemoteMediator(
                 pokemonRepository = this,
-                remoteKeysRepository = remoteKeysRepository
+                remoteKeysRepository = remoteKeysRepository,
+                generation = generation
             )
         ) {
-            pokemonDao.selectAllDisplayPokemonPagingSource()
+            pokemonDao.selectAllDisplayPokemonPagingSource(
+                begin = generation.lowerBound(),
+                end = generation.upperBound()
+            )
         }.flow
     }
 
-    suspend fun fetchPokemonPagedList(offset: Int = 0, pageSize: Int): PagedPokemonList {
-        return pokemonWebservice.fetchAllPokemon(offset, pageSize)
+    suspend fun fetchPokemonPagedList(
+        generation: Generation,
+        offset: Int = 0,
+        pageSize: Int
+    ): PagedPokemonList {
+        return pokemonWebservice.fetchAllPokemon(generation, offset, pageSize)
     }
 
     suspend fun fetchPokemon(name: String) {

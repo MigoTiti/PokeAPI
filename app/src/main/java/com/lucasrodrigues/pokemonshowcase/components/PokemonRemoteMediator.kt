@@ -4,6 +4,7 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.RemoteKey
 import com.lucasrodrigues.pokemonshowcase.repository.PokemonRepository
@@ -13,7 +14,8 @@ import kotlin.math.max
 @ExperimentalPagingApi
 class PokemonRemoteMediator(
     private val pokemonRepository: PokemonRepository,
-    private val remoteKeysRepository: RemoteKeysRepository
+    private val remoteKeysRepository: RemoteKeysRepository,
+    private val generation: Generation
 ) : RemoteMediator<Int, DisplayPokemon>() {
     override suspend fun load(
         loadType: LoadType,
@@ -54,7 +56,8 @@ class PokemonRemoteMediator(
         try {
             val currentPage = pokemonRepository.fetchPokemonPagedList(
                 offset = offset,
-                pageSize = state.config.pageSize
+                pageSize = state.config.pageSize,
+                generation = generation
             )
 
             val endOfPaginationReached = when {
@@ -79,7 +82,7 @@ class PokemonRemoteMediator(
         }?.data?.lastOrNull()
             ?.let { pokemon ->
                 remoteKeysRepository.getKeyByPokemonName(pokemon.name)
-                    ?: remoteKeysRepository.getLastKey()
+                    ?: remoteKeysRepository.getLastKey(generation)
             }
     }
 
@@ -91,7 +94,7 @@ class PokemonRemoteMediator(
         }?.data?.firstOrNull()
             ?.let { pokemon ->
                 remoteKeysRepository.getKeyByPokemonName(pokemon.name)
-                    ?: remoteKeysRepository.getFirstKey()
+                    ?: remoteKeysRepository.getFirstKey(generation)
             }
     }
 
@@ -101,7 +104,7 @@ class PokemonRemoteMediator(
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.let { pokemon ->
                 remoteKeysRepository.getKeyByPokemonName(pokemon.name)
-                    ?: remoteKeysRepository.getFirstKey()
+                    ?: remoteKeysRepository.getFirstKey(generation)
             }
         }
     }

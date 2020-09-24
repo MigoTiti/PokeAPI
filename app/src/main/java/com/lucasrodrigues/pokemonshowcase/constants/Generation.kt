@@ -1,15 +1,22 @@
 package com.lucasrodrigues.pokemonshowcase.constants
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 enum class Generation(
-    begin: Int,
-    end: Int
-) {
-    I(0, 150),
-    II(151, 250),
-    III(251, 385),
-    IV(386, 492),
-    V(493, 648),
-    VI(649, 720),
-    VII(721, 808),
-    VIII(809, 892)
+    private val begin: Int,
+    private val end: Int
+) : Parcelable {
+    I(1, 151),
+    II(152, 251),
+    III(252, 386),
+    IV(387, 493),
+    V(494, 649),
+    VI(650, 721),
+    VII(722, 809),
+    VIII(810, 893);
+
+    fun lowerBound(): Int = begin
+    fun upperBound(): Int = end
 }

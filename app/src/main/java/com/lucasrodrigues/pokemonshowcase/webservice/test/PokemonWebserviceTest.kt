@@ -1,5 +1,6 @@
 package com.lucasrodrigues.pokemonshowcase.webservice.test
 
+import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.extensions.toDisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
 import com.lucasrodrigues.pokemonshowcase.model.Pokemon
@@ -11,7 +12,7 @@ import kotlin.random.Random
 
 class PokemonWebserviceTest : PokemonWebservice {
 
-    val pokemon = (1..151).map { index ->
+    val pokemon = (1..893).map { index ->
         Pokemon(
             name = "pokemon$index",
             number = index,
@@ -25,7 +26,11 @@ class PokemonWebserviceTest : PokemonWebservice {
         )
     }
 
-    override suspend fun fetchAllPokemon(offset: Int, pageSize: Int): PagedPokemonList {
+    override suspend fun fetchAllPokemon(
+        generation: Generation,
+        offset: Int,
+        pageSize: Int
+    ): PagedPokemonList {
         delay(if (offset == 0) 2000L else 500L)
 
         val success = true
@@ -33,17 +38,22 @@ class PokemonWebserviceTest : PokemonWebservice {
         if (!success)
             throw Exception("Exception 1")
 
-        val result = pokemon.subList(offset, pokemon.size).take(pageSize)
+        val lowerBound = generation.lowerBound() - 1
+        val upperBound = generation.upperBound()
+
+        val newOffset = if (offset == 0) offset + lowerBound else offset
+
+        val result = pokemon.subList(newOffset, upperBound).take(pageSize)
 
         return PagedPokemonList(
-            previousOffset = if (offset == 0)
+            previousOffset = if (offset == lowerBound)
                 null
             else
-                max(0, offset - pageSize),
-            nextOffset = if (offset + result.size == pokemon.size)
+                max(lowerBound, newOffset - pageSize),
+            nextOffset = if (newOffset + result.size >= upperBound - 1)
                 null
             else
-                min(pokemon.size - 1, offset + pageSize),
+                min(upperBound - 1, newOffset + pageSize),
             pokemon = result.map {
                 it.toDisplayPokemon()
             }.toList(),

@@ -2,6 +2,7 @@ package com.lucasrodrigues.pokemonshowcase.repository
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.room.withTransaction
+import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.data_access.local.LocalDatabase
 import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.RemoteKeysDao
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
@@ -34,11 +35,17 @@ class RemoteKeysRepository(
         return remoteKeysDao.remoteKeysById(name)
     }
 
-    suspend fun getLastKey(): RemoteKey? {
-        return remoteKeysDao.lastKey()
+    suspend fun getLastKey(generation: Generation): RemoteKey? {
+        return remoteKeysDao.lastKey(
+            begin = generation.lowerBound(),
+            end = generation.upperBound()
+        )
     }
 
-    suspend fun getFirstKey(): RemoteKey? {
-        return remoteKeysDao.firstKey()
+    suspend fun getFirstKey(generation: Generation): RemoteKey? {
+        return remoteKeysDao.firstKey(
+            begin = generation.lowerBound(),
+            end = generation.upperBound()
+        )
     }
 }

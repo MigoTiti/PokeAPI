@@ -2,21 +2,13 @@ package com.lucasrodrigues.pokemonshowcase.view
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LoadState
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.lucasrodrigues.pokemonshowcase.R
-import com.lucasrodrigues.pokemonshowcase.components.adapter.PagingLoadStateAdapter
-import com.lucasrodrigues.pokemonshowcase.components.adapter.PokemonAdapter
+import com.lucasrodrigues.pokemonshowcase.components.adapter.GenerationPokemonAdapter
 import com.lucasrodrigues.pokemonshowcase.databinding.ActivityMainBinding
-import com.lucasrodrigues.pokemonshowcase.model.LoadingState
 import com.lucasrodrigues.pokemonshowcase.view_model.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.component_error.*
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -26,52 +18,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override val viewModel by viewModel<MainViewModel> { parametersOf(this as Activity) }
     override val layoutId = R.layout.activity_main
 
-    private val allPokemonAdapter = PokemonAdapter(
-        navigationService = navigationService,
-        layoutId = R.layout.item_pokemon
-    ) {
-        viewModel.toggleFavorite(it)
-    }
+    private lateinit var generationAdapter: GenerationPokemonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        allPokemonRv.apply {
-            layoutManager = GridLayoutManager(
-                context,
-                3,
-                RecyclerView.VERTICAL,
-                false
-            )
+        generationAdapter = GenerationPokemonAdapter(this)
 
-            adapter = allPokemonAdapter.withLoadStateFooter(
-                footer = PagingLoadStateAdapter(
-                    loadingLayoutId = R.layout.item_pokemon_placeholder,
-                    errorLayoutId = R.layout.item_pokemon_error_loading
-                ) {
-                    allPokemonAdapter.retry()
-                }
-            )
-        }
+        generationPager.adapter = generationAdapter
 
-        allPokemonAdapter.addLoadStateListener { loadState ->
-            val refreshState = when (loadState.refresh) {
-                is LoadState.Error -> LoadingState.Error((loadState.refresh as LoadState.Error).error)
-                is LoadState.Loading -> LoadingState.Loading
-                is LoadState.NotLoading -> LoadingState.Idle
-            }
-
-            if (refreshState != viewModel.firstLoadState.value)
-                viewModel.firstLoadState.postValue(refreshState)
-        }
-
-        tryAgain.setOnClickListener {
-            allPokemonAdapter.retry()
-        }
-
-        viewModel
-            .getAllPokemon()
-            .onEach { allPokemonAdapter.submitData(it) }
-            .launchIn(viewModel.viewModelScope)
+        TabLayoutMediator(generationTabLayout, generationPager) { tab, position ->
+            tab.text = "Generation ${position + 1}"
+        }.attach()
     }
 }
