@@ -48,9 +48,7 @@ class PokemonRepository(
         val hasDetailedPokemon = pokemonDao.hasDetailedPokemon(name)
 
         if (!hasDetailedPokemon) {
-            pokemonDao.insertOrUpdatePokemonPreservingFavoriteFlag(
-                pokemonWebservice.searchPokemon(name)
-            )
+            insertPokemon(pokemonWebservice.searchPokemon(name))
         }
     }
 
