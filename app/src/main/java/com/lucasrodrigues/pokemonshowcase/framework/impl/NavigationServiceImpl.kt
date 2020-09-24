@@ -5,20 +5,26 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.paging.ExperimentalPagingApi
 import com.lucasrodrigues.pokemonshowcase.framework.NavigationService
+import com.lucasrodrigues.pokemonshowcase.view.PokemonDetailsActivity
 import org.jetbrains.anko.clearTop
 import org.jetbrains.anko.newTask
 import org.jetbrains.anko.singleTop
 import java.io.Serializable
 import java.lang.ref.WeakReference
 
+@ExperimentalPagingApi
 class NavigationServiceImpl(
     activity: Activity
 ) : NavigationService {
     private val activity = WeakReference(activity)
 
     override fun navigateToPokemonDetails(pokemonName: String) {
-        TODO("Not yet implemented")
+        startActivity(
+            PokemonDetailsActivity::class.java,
+            params = arrayOf("pokemonName" to pokemonName)
+        )
     }
 
     override fun navigateToFavoritePokemon() {

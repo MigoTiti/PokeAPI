@@ -7,8 +7,6 @@
         <variable
             name="viewModel"
             type="com.lucasrodrigues.pokemonshowcase.view_model.MainViewModel" />
-
-        <import type="com.lucasrodrigues.pokemonshowcase.model.LoadingState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

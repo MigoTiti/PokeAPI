@@ -26,6 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         generationAdapter = GenerationPokemonAdapter(this)
 
         generationPager.adapter = generationAdapter
+        generationPager.isUserInputEnabled = false
 
         TabLayoutMediator(generationTabLayout, generationPager) { tab, position ->
             tab.text = "Generation ${position + 1}"

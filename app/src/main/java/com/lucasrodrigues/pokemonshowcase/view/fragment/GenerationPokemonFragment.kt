@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasrodrigues.pokemonshowcase.R
@@ -12,6 +13,7 @@ import com.lucasrodrigues.pokemonshowcase.components.adapter.PagingLoadStateAdap
 import com.lucasrodrigues.pokemonshowcase.components.adapter.PokemonAdapter
 import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.databinding.FragmentGenerationPokemonBinding
+import com.lucasrodrigues.pokemonshowcase.model.LoadingState
 import com.lucasrodrigues.pokemonshowcase.view_model.GenerationPokemonViewModel
 import kotlinx.android.synthetic.main.component_error.*
 import kotlinx.android.synthetic.main.fragment_generation_pokemon.*
@@ -75,6 +77,17 @@ class GenerationPokemonFragment :
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        allPokemonAdapter.addLoadStateListener { loadState ->
+            val refreshState = when (loadState.refresh) {
+                is LoadState.Error -> LoadingState.Error((loadState.refresh as LoadState.Error).error)
+                is LoadState.Loading -> LoadingState.Loading
+                is LoadState.NotLoading -> LoadingState.Idle
+            }
+
+            if (refreshState != viewModel.firstLoadState.value)
+                viewModel.firstLoadState.postValue(refreshState)
+        }
 
         viewModel
             .getAllPokemon()
