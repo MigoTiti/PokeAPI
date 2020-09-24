@@ -8,6 +8,8 @@
         <variable
             name="viewModel"
             type="com.lucasrodrigues.pokemonshowcase.view_model.MainViewModel" />
+
+        <import type="com.lucasrodrigues.pokemonshowcase.model.LoadingState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,5 +26,27 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="9"
             tools:listitem="@layout/item_pokemon" />
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/component_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIfLoading="@{viewModel.firstLoadState}" />
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/component_error"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIfError="@{viewModel.firstLoadState}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

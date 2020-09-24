@@ -9,8 +9,21 @@ import com.bumptech.glide.Glide
 import com.lucasrodrigues.pokemonshowcase.BuildConfig
 import com.lucasrodrigues.pokemonshowcase.R
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
+import com.lucasrodrigues.pokemonshowcase.model.LoadingState
 
 object BindingUtils {
+
+    @JvmStatic
+    @BindingAdapter("visibleIfLoading")
+    fun visibleIfLoading(view: View, loadingState: LoadingState?) {
+        setVisibility(view, loadingState is LoadingState.Loading)
+    }
+
+    @JvmStatic
+    @BindingAdapter("visibleIfError")
+    fun visibleIfError(view: View, loadingState: LoadingState?) {
+        setVisibility(view, loadingState is LoadingState.Error)
+    }
 
     @JvmStatic
     @BindingAdapter("pokemonIcon")
