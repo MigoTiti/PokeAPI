@@ -25,17 +25,14 @@ class PagingLoadStateAdapter(
         parent: ViewGroup,
         loadState: LoadState
     ): DataBindingViewHolder {
+        val viewId = when (loadState) {
+            is LoadState.Loading -> loadingLayoutId
+            is LoadState.Error -> errorLayoutId
+            else -> 0
+        }
+
         return DataBindingViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                when (loadState) {
-                    is LoadState.Loading -> loadingLayoutId
-                    is LoadState.Error -> errorLayoutId
-                    else -> 0
-                },
-                parent,
-                false
-            )
+            DataBindingUtil.inflate(LayoutInflater.from(parent.context), viewId, parent, false)
         )
     }
 }

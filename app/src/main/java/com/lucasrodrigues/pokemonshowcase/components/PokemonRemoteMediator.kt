@@ -40,7 +40,9 @@ class PokemonRemoteMediator(
                 val remoteKey = getRemoteKeyForLastItem(state)
 
                 if (remoteKey?.nextKey == null) {
-                    throw InvalidObjectException("Remote key should not be null for $loadType")
+                    return MediatorResult.Success(
+                        endOfPaginationReached = true
+                    )
                 }
 
                 remoteKey.nextKey

@@ -47,7 +47,7 @@ class PokemonAdapter(
     private fun setAnimation(viewToAnimate: View, position: Int) {
         val animation = AnimationUtils.loadAnimation(
             viewToAnimate.context,
-            if (position > lastPosition) R.anim.slide_in_left else R.anim.slide_in_right
+            if (position > lastPosition) R.anim.slide_in_bottom else R.anim.slide_in_top
         )
 
         viewToAnimate.startAnimation(animation)
