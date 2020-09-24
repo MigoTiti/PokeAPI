@@ -1,7 +1,14 @@
 package com.lucasrodrigues.pokemonshowcase.view
 
 import android.app.Activity
+import android.app.SearchManager
+import android.content.Context
+import android.database.Cursor
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
+import androidx.cursoradapter.widget.CursorAdapter
 import androidx.paging.ExperimentalPagingApi
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lucasrodrigues.pokemonshowcase.R
@@ -31,5 +38,42 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         TabLayoutMediator(generationTabLayout, generationPager) { tab, position ->
             tab.text = "Generation ${position + 1}"
         }.attach()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu?.findItem(R.id.action_search)?.actionView as SearchView?)?.apply {
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            isQueryRefinementEnabled = true
+
+            setOnSuggestionListener(object : SearchView.OnSuggestionListener {
+                override fun onSuggestionSelect(position: Int): Boolean {
+                    return true
+                }
+
+                override fun onSuggestionClick(position: Int): Boolean {
+                    val selectedView: CursorAdapter = suggestionsAdapter
+                    val cursor: Cursor = selectedView.getItem(position) as Cursor
+                    val index: Int = cursor.getColumnIndexOrThrow(
+                        SearchManager.SUGGEST_COLUMN_TEXT_1
+                    )
+                    setQuery(cursor.getString(index), true)
+                    return true
+                }
+            })
+        }
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_open_favorites -> navigationService.navigateToFavoritePokemon()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

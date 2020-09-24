@@ -12,7 +12,7 @@ class PokemonDetailsViewModel(
     navigationService: NavigationService,
     alertService: AlertService,
     private val pokemonRepository: PokemonRepository,
-    private val pokemonName: String
+    val pokemonName: String
 ) : BaseViewModel(navigationService, alertService) {
 
     val pokemonDetails = pokemonRepository.listenToPokemon(pokemonName)
@@ -26,5 +26,12 @@ class PokemonDetailsViewModel(
         ) {
             pokemonRepository.fetchPokemon(pokemonName)
         }
+    }
+
+    fun toggleFavorite() {
+        if (pokemonDetails.value != null)
+            request {
+                pokemonRepository.toggleFavoritePokemon(pokemonDetails.value!!)
+            }
     }
 }

@@ -4,4 +4,7 @@
     <string name="error_unknown">Unknown error</string>
     <string name="error_loading_data">Error loading data</string>
     <string name="label_try_again">Try again</string>
+    <string name="label_favorite_pokemon">Favorite Pokemon</string>
+    <string name="label_search">Search</string>
+    <string name="empty_favorite_list">No favorites added yet</string>
 </resources>
