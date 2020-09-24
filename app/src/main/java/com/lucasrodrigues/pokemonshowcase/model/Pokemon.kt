@@ -11,14 +11,14 @@ import kotlinx.android.parcel.Parcelize
 @Entity(
     indices = [
         Index(
-            value = ["name"],
+            value = ["number"],
             unique = true
         )
     ]
 )
 data class Pokemon(
-    @PrimaryKey val id: Int,
-    @ColumnInfo val name: String,
+    @PrimaryKey val name: String,
+    @ColumnInfo val number: Int,
     @ColumnInfo val abilities: List<String>?,
     @ColumnInfo val sprites: List<PokemonSprite>?,
     @ColumnInfo val height: Int?,

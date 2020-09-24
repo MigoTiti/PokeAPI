@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class DisplayPokemon(
-    val name: String,
-    val number: Int?
+data class PagedPokemonList(
+    val previousOffset: Int?,
+    val nextOffset: Int?,
+    val pokemon: List<DisplayPokemon>
 ) : Parcelable
