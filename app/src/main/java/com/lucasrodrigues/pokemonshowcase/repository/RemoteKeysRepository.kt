@@ -14,12 +14,8 @@ class RemoteKeysRepository(
     private val pokemonRepository: PokemonRepository
 ) {
 
-    suspend fun insertKeys(pagedList: PagedPokemonList, refresh: Boolean = false) {
+    suspend fun insertKeys(pagedList: PagedPokemonList) {
         database.withTransaction {
-            if (refresh) {
-                remoteKeysDao.clear()
-            }
-
             val keys = pagedList.pokemon.map {
                 RemoteKey(
                     pokemonName = it.name,

@@ -8,7 +8,6 @@ import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.RemoteKey
 import com.lucasrodrigues.pokemonshowcase.repository.PokemonRepository
 import com.lucasrodrigues.pokemonshowcase.repository.RemoteKeysRepository
-import java.io.InvalidObjectException
 import kotlin.math.max
 
 @ExperimentalPagingApi
@@ -27,14 +26,17 @@ class PokemonRemoteMediator(
             }
             LoadType.PREPEND -> {
                 val remoteKey = getRemoteKeyForFirstItem(state)
-                    ?: throw InvalidObjectException("Remote key and the prevKey should not be null")
 
-                val prevKey = remoteKey.previousKey
-                    ?: return MediatorResult.Success(
-                        endOfPaginationReached = true
-                    )
+                if (remoteKey == null)
+                    0
+                else {
+                    val prevKey = remoteKey.previousKey
+                        ?: return MediatorResult.Success(
+                            endOfPaginationReached = true
+                        )
 
-                prevKey
+                    prevKey
+                }
             }
             LoadType.APPEND -> {
                 val remoteKey = getRemoteKeyForLastItem(state)
@@ -61,10 +63,7 @@ class PokemonRemoteMediator(
                 else -> false
             }
 
-            remoteKeysRepository.insertKeys(
-                pagedList = currentPage,
-                refresh = loadType == LoadType.REFRESH
-            )
+            remoteKeysRepository.insertKeys(currentPage)
 
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (e: Exception) {
