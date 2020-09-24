@@ -28,4 +28,10 @@ class MainViewModel(
             .allPokemonPagedList(remoteKeysRepository)
             .cachedIn(viewModelScope)
     }
+
+    fun toggleFavorite(pokemon: DisplayPokemon) {
+        request {
+            pokemonRepository.toggleFavoritePokemon(pokemon)
+        }
+    }
 }

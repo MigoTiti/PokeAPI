@@ -29,7 +29,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private val allPokemonAdapter = PokemonAdapter(
         navigationService = navigationService,
         layoutId = R.layout.item_pokemon
-    )
+    ) {
+        viewModel.toggleFavorite(it)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

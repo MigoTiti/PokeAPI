@@ -12,6 +12,10 @@
         <variable
             name="onClick"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onFavoriteClick"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,5 +55,18 @@
             app:layout_constraintStart_toStartOf="@+id/reviewThumbnail"
             app:layout_constraintTop_toBottomOf="@+id/reviewThumbnail"
             tools:text="Filme" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:onClick="@{onFavoriteClick}"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:tint="#FF475B"
+            app:icon="@{item.favorite ? @drawable/ic_favorite : @drawable/ic_not_favorite}"
+            tools:src="@drawable/ic_favorite" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

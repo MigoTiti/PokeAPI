@@ -14,14 +14,21 @@ import com.lucasrodrigues.pokemonshowcase.utils.DisplayPokemonComparator
 
 class PokemonAdapter(
     private val navigationService: NavigationService,
-    private val layoutId: Int
+    private val layoutId: Int,
+    private val onFavoriteClick: (pokemon: DisplayPokemon) -> Unit
 ) : PagingDataAdapter<DisplayPokemon, DataBindingViewHolder>(DisplayPokemonComparator) {
     private var lastPosition = -1
 
     override fun onBindViewHolder(holder: DataBindingViewHolder, position: Int) {
         val item: DisplayPokemon? = getItem(position)
 
-        holder.bind(item) {
+        holder.bind(
+            item,
+            onFavoriteClick = {
+                if (item != null)
+                    onFavoriteClick(item)
+            }
+        ) {
             if (item != null)
                 navigationService.navigateToPokemonDetails(item.name)
         }
@@ -45,13 +52,15 @@ class PokemonAdapter(
     }
 
     private fun setAnimation(viewToAnimate: View, position: Int) {
-        val animation = AnimationUtils.loadAnimation(
-            viewToAnimate.context,
-            if (position > lastPosition) R.anim.slide_in_bottom else R.anim.slide_in_top
-        )
+        if (position > lastPosition) {
+            val animation = AnimationUtils.loadAnimation(
+                viewToAnimate.context,
+                R.anim.slide_in_bottom
+            )
 
-        viewToAnimate.startAnimation(animation)
+            viewToAnimate.startAnimation(animation)
 
-        lastPosition = position
+            lastPosition = position
+        }
     }
 }

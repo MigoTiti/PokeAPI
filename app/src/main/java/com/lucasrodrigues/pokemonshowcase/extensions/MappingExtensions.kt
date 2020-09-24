@@ -6,7 +6,8 @@ import com.lucasrodrigues.pokemonshowcase.model.Pokemon
 fun Pokemon.toDisplayPokemon(): DisplayPokemon {
     return DisplayPokemon(
         name = name,
-        number = number
+        number = number,
+        isFavorite = isFavorite
     )
 }
 

@@ -1,6 +1,8 @@
 package com.lucasrodrigues.pokemonshowcase.utils
 
+import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -12,6 +14,12 @@ import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.LoadingState
 
 object BindingUtils {
+
+    @JvmStatic
+    @BindingAdapter("icon")
+    fun setIcon(view: ImageButton, drawable: Drawable?) {
+        view.setImageDrawable(drawable)
+    }
 
     @JvmStatic
     @BindingAdapter("visibleIfLoading")

@@ -12,10 +12,10 @@ import com.lucasrodrigues.pokemonshowcase.model.Pokemon
 @Dao
 interface PokemonDao : BaseDao<Pokemon> {
 
-    @Query("SELECT name, number FROM Pokemon ORDER BY number ASC")
+    @Query("SELECT name, number, is_favorite FROM Pokemon ORDER BY number ASC")
     fun selectAllDisplayPokemonPagingSource(): PagingSource<Int, DisplayPokemon>
 
-    @Query("SELECT name, number FROM Pokemon WHERE is_favorite == 1 ORDER BY number ASC")
+    @Query("SELECT name, number, is_favorite FROM Pokemon WHERE is_favorite == 1 ORDER BY number ASC")
     fun getAllFavoritePokemon(): LiveData<List<DisplayPokemon>>
 
     @Query("SELECT * FROM Pokemon WHERE name == :id")
