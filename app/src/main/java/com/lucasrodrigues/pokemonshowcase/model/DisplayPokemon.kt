@@ -1,6 +1,10 @@
 package com.lucasrodrigues.pokemonshowcase.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class DisplayPokemon(
-    val id: Int,
+    val id: Int?,
     val name: String
-)
+) : Parcelable

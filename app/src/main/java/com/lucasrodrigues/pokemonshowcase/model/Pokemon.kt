@@ -3,11 +3,19 @@ package com.lucasrodrigues.pokemonshowcase.model
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity
+@Entity(
+    indices = [
+        Index(
+            value = ["name"],
+            unique = true
+        )
+    ]
+)
 data class Pokemon(
     @PrimaryKey val id: Int,
     @ColumnInfo val name: String,

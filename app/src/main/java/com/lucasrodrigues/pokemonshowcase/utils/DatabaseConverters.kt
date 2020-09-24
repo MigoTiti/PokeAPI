@@ -2,20 +2,32 @@ package com.lucasrodrigues.pokemonshowcase.utils
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.lucasrodrigues.pokemonshowcase.model.PokemonSprite
-import java.util.*
 
 object DatabaseConverters {
 
     @JvmStatic
     @TypeConverter
-    fun toPokemonSpriteFromString(json: String?): PokemonSprite? {
-        return Gson().fromJson(json, PokemonSprite::class.java)
+    fun toPokemonSpriteListFromString(value: String?): List<PokemonSprite>? {
+        return Gson().fromJson(value, object : TypeToken<List<String>>() {}.type)
     }
 
     @JvmStatic
     @TypeConverter
-    fun fromPokemonSpriteToSprint(pokemonSprite: PokemonSprite?): String? {
-        return Gson().toJson(pokemonSprite)
+    fun toStringFromPokemonSpriteList(list: List<PokemonSprite>?): String {
+        return Gson().toJson(list)
+    }
+
+    @JvmStatic
+    @TypeConverter
+    fun toStringListFromString(value: String?): List<String>? {
+        return Gson().fromJson(value, object : TypeToken<List<String>>() {}.type)
+    }
+
+    @JvmStatic
+    @TypeConverter
+    fun toStringFromStringList(list: List<String>?): String {
+        return Gson().toJson(list)
     }
 }
