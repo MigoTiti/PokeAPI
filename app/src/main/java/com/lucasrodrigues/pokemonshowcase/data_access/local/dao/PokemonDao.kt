@@ -34,6 +34,14 @@ interface PokemonDao : BaseDao<Pokemon> {
         update(pokemon.copy(isFavorite = !pokemon.isFavorite))
     }
 
+    @Transaction
+    suspend fun toggleFavoriteFlag(name: String) {
+        val pokemon = selectPokemonById(name)
+
+        if (pokemon != null)
+            update(pokemon.copy(isFavorite = !pokemon.isFavorite))
+    }
+
     @Query("DELETE FROM Pokemon")
     suspend fun clear()
 

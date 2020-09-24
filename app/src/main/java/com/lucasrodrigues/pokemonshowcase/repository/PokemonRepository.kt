@@ -39,4 +39,16 @@ class PokemonRepository(
             )
         }
     }
+
+    suspend fun toggleFavoritePokemon(pokemon: Pokemon) {
+        pokemonDao.toggleFavoriteFlag(pokemon)
+    }
+
+    suspend fun toggleFavoritePokemon(pokemon: DisplayPokemon) {
+        toggleFavoritePokemon(pokemon.name)
+    }
+
+    suspend fun toggleFavoritePokemon(name: String) {
+        pokemonDao.toggleFavoriteFlag(name)
+    }
 }
