@@ -6,5 +6,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class DisplayPokemon(
     val name: String,
-    val number: Int?
+    val number: Int
 ) : Parcelable

@@ -25,7 +25,7 @@ class PokemonWebserviceTest : PokemonWebservice {
         )
     }
 
-    override suspend fun fetchAllPokemon(offset: Int): PagedPokemonList {
+    override suspend fun fetchAllPokemon(offset: Int, pageSize: Int): PagedPokemonList {
         delay(500L)
 
         val success = true
@@ -33,7 +33,6 @@ class PokemonWebserviceTest : PokemonWebservice {
         if (!success)
             throw Exception("Exception 1")
 
-        val pageSize = 20
         val result = pokemon.subList(offset, pokemon.size).take(pageSize)
 
         return PagedPokemonList(

@@ -3,6 +3,7 @@ package com.lucasrodrigues.pokemonshowcase
 import android.app.Application
 import androidx.paging.ExperimentalPagingApi
 import com.lucasrodrigues.pokemonshowcase.dependencies.DataAccessDependencies
+import com.lucasrodrigues.pokemonshowcase.dependencies.FrameworkDependencies
 import com.lucasrodrigues.pokemonshowcase.dependencies.RepositoryDependencies
 import com.lucasrodrigues.pokemonshowcase.dependencies.WebserviceDependencies
 import org.koin.android.ext.koin.androidContext
@@ -21,6 +22,7 @@ class Application : Application() {
                     DataAccessDependencies.module,
                     WebserviceDependencies.module,
                     RepositoryDependencies.module,
+                    FrameworkDependencies.module,
                 )
             )
         }

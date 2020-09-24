@@ -6,14 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.PokemonDao
+import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.RemoteKeysDao
 import com.lucasrodrigues.pokemonshowcase.model.Pokemon
+import com.lucasrodrigues.pokemonshowcase.model.RemoteKey
 import com.lucasrodrigues.pokemonshowcase.utils.DatabaseConverters
 
 @Database(
     entities = [
-        Pokemon::class
+        Pokemon::class,
+        RemoteKey::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(DatabaseConverters::class)
 abstract class LocalDatabase : RoomDatabase() {
@@ -43,4 +47,5 @@ abstract class LocalDatabase : RoomDatabase() {
     }
 
     abstract fun pokemonDao(): PokemonDao
+    abstract fun remoteKeyDao(): RemoteKeysDao
 }

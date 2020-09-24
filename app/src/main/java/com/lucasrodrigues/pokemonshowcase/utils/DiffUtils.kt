@@ -1,14 +1,14 @@
 package com.lucasrodrigues.pokemonshowcase.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.lucasrodrigues.pokemonshowcase.model.Pokemon
+import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
 
-object PokemonComparator : DiffUtil.ItemCallback<Pokemon>() {
-    override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
+object DisplayPokemonComparator : DiffUtil.ItemCallback<DisplayPokemon>() {
+    override fun areItemsTheSame(oldItem: DisplayPokemon, newItem: DisplayPokemon): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
+    override fun areContentsTheSame(oldItem: DisplayPokemon, newItem: DisplayPokemon): Boolean {
         return oldItem == newItem
     }
 }

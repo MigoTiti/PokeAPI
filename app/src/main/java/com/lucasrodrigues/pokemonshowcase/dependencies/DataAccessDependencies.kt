@@ -40,5 +40,6 @@ object DataAccessDependencies {
         single { LocalDatabase.getInstance(androidContext().applicationContext) }
 
         single { get<LocalDatabase>().pokemonDao() }
+        single { get<LocalDatabase>().remoteKeyDao() }
     }
 }

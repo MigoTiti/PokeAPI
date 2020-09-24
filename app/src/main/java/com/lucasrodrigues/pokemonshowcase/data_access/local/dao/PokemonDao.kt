@@ -5,6 +5,7 @@ import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import com.lucasrodrigues.pokemonshowcase.extensions.toPokemon
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.Pokemon
 
@@ -46,7 +47,7 @@ interface PokemonDao : BaseDao<Pokemon> {
     suspend fun clear()
 
     @Transaction
-    suspend fun insertPokemonPreservingFavoriteFlag(vararg pokemon: Pokemon) {
+    suspend fun insertOrUpdatePokemonPreservingFavoriteFlag(vararg pokemon: Pokemon) {
         pokemon.forEach {
             val currentItem = selectPokemonById(it.name)
 
@@ -54,6 +55,17 @@ interface PokemonDao : BaseDao<Pokemon> {
                 update(it.copy(isFavorite = currentItem.isFavorite))
             } else {
                 insert(it)
+            }
+        }
+    }
+
+    @Transaction
+    suspend fun insertIfNotPresent(vararg pokemon: DisplayPokemon) {
+        pokemon.forEach {
+            val currentItem = selectPokemonById(it.name)
+
+            if (currentItem == null) {
+                insert(it.toPokemon())
             }
         }
     }

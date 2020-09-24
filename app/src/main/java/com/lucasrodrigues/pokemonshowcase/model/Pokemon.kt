@@ -19,10 +19,10 @@ import kotlinx.android.parcel.Parcelize
 data class Pokemon(
     @PrimaryKey val name: String,
     @ColumnInfo val number: Int,
-    @ColumnInfo val abilities: List<String>?,
-    @ColumnInfo val sprites: List<PokemonSprite>?,
-    @ColumnInfo val height: Int?,
-    @ColumnInfo val weight: Int?,
-    @ColumnInfo(name = "base_experience") val baseExperience: Int?,
+    @ColumnInfo val abilities: List<String>? = null,
+    @ColumnInfo val sprites: List<PokemonSprite>? = null,
+    @ColumnInfo val height: Int? = null,
+    @ColumnInfo val weight: Int? = null,
+    @ColumnInfo(name = "base_experience") val baseExperience: Int? = null,
     @ColumnInfo(name = "is_favorite") var isFavorite: Boolean = false,
 ) : Parcelable

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pokemon Showcase</string>
+
+    <string name="error_unknown">Unknown error</string>
+    <string name="error_loading_data">Error loading data</string>
+    <string name="label_try_again">Try again</string>
 </resources>

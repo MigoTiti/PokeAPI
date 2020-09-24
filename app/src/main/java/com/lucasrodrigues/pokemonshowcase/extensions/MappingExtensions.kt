@@ -9,3 +9,10 @@ fun Pokemon.toDisplayPokemon(): DisplayPokemon {
         number = number
     )
 }
+
+fun DisplayPokemon.toPokemon(): Pokemon {
+    return Pokemon(
+        name = name,
+        number = number
+    )
+}

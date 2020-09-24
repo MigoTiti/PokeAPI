@@ -2,6 +2,7 @@ package com.lucasrodrigues.pokemonshowcase.dependencies
 
 import androidx.paging.ExperimentalPagingApi
 import com.lucasrodrigues.pokemonshowcase.repository.PokemonRepository
+import com.lucasrodrigues.pokemonshowcase.repository.RemoteKeysRepository
 import org.koin.dsl.module
 
 @ExperimentalPagingApi
@@ -11,6 +12,14 @@ object RepositoryDependencies {
             PokemonRepository(
                 pokemonDao = get(),
                 pokemonWebservice = get()
+            )
+        }
+
+        single {
+            RemoteKeysRepository(
+                remoteKeysDao = get(),
+                database = get(),
+                pokemonRepository = get()
             )
         }
     }

@@ -1,15 +1,19 @@
 package com.lucasrodrigues.pokemonshowcase.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.lucasrodrigues.pokemonshowcase.components.PokemonRemoteMediator
 import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.PokemonDao
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
+import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
 import com.lucasrodrigues.pokemonshowcase.model.Pokemon
 import com.lucasrodrigues.pokemonshowcase.webservice.PokemonWebservice
 import kotlinx.coroutines.flow.Flow
 
+@ExperimentalPagingApi
 class PokemonRepository(
     private val pokemonDao: PokemonDao,
     private val pokemonWebservice: PokemonWebservice
@@ -22,22 +26,40 @@ class PokemonRepository(
         return pokemonDao.getAllFavoritePokemon()
     }
 
-    fun allPokemonPagedList(): Flow<PagingData<DisplayPokemon>> {
+    fun allPokemonPagedList(
+        remoteKeysRepository: RemoteKeysRepository
+    ): Flow<PagingData<DisplayPokemon>> {
         return Pager(
-            config = PagingConfig(pageSize = 20)
+            config = PagingConfig(pageSize = 20),
+            remoteMediator = PokemonRemoteMediator(
+                pokemonRepository = this,
+                remoteKeysRepository = remoteKeysRepository
+            )
         ) {
             pokemonDao.selectAllDisplayPokemonPagingSource()
         }.flow
+    }
+
+    suspend fun fetchPokemonPagedList(offset: Int = 0, pageSize: Int): PagedPokemonList {
+        return pokemonWebservice.fetchAllPokemon(offset, pageSize)
     }
 
     suspend fun fetchPokemon(name: String) {
         val hasDetailedPokemon = pokemonDao.hasDetailedPokemon(name)
 
         if (!hasDetailedPokemon) {
-            pokemonDao.insertPokemonPreservingFavoriteFlag(
+            pokemonDao.insertOrUpdatePokemonPreservingFavoriteFlag(
                 pokemonWebservice.searchPokemon(name)
             )
         }
+    }
+
+    suspend fun insertPokemon(vararg pokemon: Pokemon) {
+        pokemonDao.insertOrUpdatePokemonPreservingFavoriteFlag(*pokemon)
+    }
+
+    suspend fun insertPokemon(vararg pokemon: DisplayPokemon) {
+        pokemonDao.insertIfNotPresent(*pokemon)
     }
 
     suspend fun toggleFavoritePokemon(pokemon: Pokemon) {
