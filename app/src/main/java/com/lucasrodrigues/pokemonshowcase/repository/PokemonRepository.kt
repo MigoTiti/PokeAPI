@@ -48,10 +48,10 @@ class PokemonRepository(
 
     suspend fun fetchPokemonPagedList(
         generation: Generation,
-        offset: Int = 0,
+        generationRelativeOffset: Int = 0,
         pageSize: Int
     ): PagedPokemonList {
-        return pokemonWebservice.fetchAllPokemon(generation, offset, pageSize)
+        return pokemonWebservice.fetchAllPokemon(generation, generationRelativeOffset, pageSize)
     }
 
     suspend fun fetchPokemon(name: String) {

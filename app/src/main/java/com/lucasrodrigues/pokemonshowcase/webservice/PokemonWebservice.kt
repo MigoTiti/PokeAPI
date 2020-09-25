@@ -7,7 +7,7 @@ import com.lucasrodrigues.pokemonshowcase.model.Pokemon
 interface PokemonWebservice {
     suspend fun fetchAllPokemon(
         generation: Generation,
-        offset: Int,
+        generationRelativeOffset: Int,
         pageSize: Int
     ): PagedPokemonList
 

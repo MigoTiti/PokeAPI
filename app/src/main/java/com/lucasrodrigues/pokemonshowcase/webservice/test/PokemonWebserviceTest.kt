@@ -28,32 +28,32 @@ class PokemonWebserviceTest : PokemonWebservice {
 
     override suspend fun fetchAllPokemon(
         generation: Generation,
-        offset: Int,
+        generationRelativeOffset: Int,
         pageSize: Int
     ): PagedPokemonList {
-        delay(if (offset == 0) 2000L else 500L)
+        delay(if (generationRelativeOffset == 0) 2000L else 500L)
 
         val success = true
 
         if (!success)
             throw Exception("Exception 1")
 
-        val lowerBound = generation.lowerBound() - 1
-        val upperBound = generation.upperBound()
+        val generationLowerBound = generation.lowerBound() - 1
+        val generationUpperBound = generation.upperBound()
 
-        val newOffset = if (offset == 0) offset + lowerBound else offset
+        val absoluteOffset = generationRelativeOffset + generationLowerBound
 
-        val result = pokemon.subList(newOffset, upperBound).take(pageSize)
+        val result = pokemon.subList(absoluteOffset, generationUpperBound).take(pageSize)
 
         return PagedPokemonList(
-            previousOffset = if (offset == lowerBound)
+            previousOffset = if (absoluteOffset == generationLowerBound)
                 null
             else
-                max(lowerBound, newOffset - pageSize),
-            nextOffset = if (newOffset + result.size >= upperBound - 1)
+                max(0, generationRelativeOffset - pageSize),
+            nextOffset = if (absoluteOffset + result.size >= generationUpperBound - 1)
                 null
             else
-                min(upperBound - 1, newOffset + pageSize),
+                min(generationUpperBound - 1, generationRelativeOffset + pageSize),
             pokemon = result.map {
                 it.toDisplayPokemon()
             }.toList(),

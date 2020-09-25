@@ -55,7 +55,7 @@ class PokemonRemoteMediator(
 
         try {
             val currentPage = pokemonRepository.fetchPokemonPagedList(
-                offset = offset,
+                generationRelativeOffset = offset,
                 pageSize = state.config.pageSize,
                 generation = generation
             )

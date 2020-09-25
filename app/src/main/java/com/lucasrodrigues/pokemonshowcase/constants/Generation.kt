@@ -17,6 +17,7 @@ enum class Generation(
     VII(722, 809),
     VIII(810, 893);
 
-    fun lowerBound(): Int = begin
-    fun upperBound(): Int = end
+    fun lowerBound() = begin
+    fun upperBound() = end
+    fun size() = end - begin + 1
 }
