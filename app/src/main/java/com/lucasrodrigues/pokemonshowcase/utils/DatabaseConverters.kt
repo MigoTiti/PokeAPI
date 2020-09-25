@@ -4,13 +4,14 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lucasrodrigues.pokemonshowcase.model.PokemonSprite
+import com.lucasrodrigues.pokemonshowcase.model.PokemonStat
 
 object DatabaseConverters {
 
     @JvmStatic
     @TypeConverter
     fun toPokemonSpriteListFromString(value: String?): List<PokemonSprite>? {
-        return Gson().fromJson(value, object : TypeToken<List<String>>() {}.type)
+        return Gson().fromJson(value, object : TypeToken<List<PokemonSprite>>() {}.type)
     }
 
     @JvmStatic
@@ -21,13 +22,13 @@ object DatabaseConverters {
 
     @JvmStatic
     @TypeConverter
-    fun toStringListFromString(value: String?): List<String>? {
-        return Gson().fromJson(value, object : TypeToken<List<String>>() {}.type)
+    fun toPokemonStatListFromString(value: String?): List<PokemonStat>? {
+        return Gson().fromJson(value, object : TypeToken<List<PokemonStat>>() {}.type)
     }
 
     @JvmStatic
     @TypeConverter
-    fun toStringFromStringList(list: List<String>?): String {
+    fun toStringFromPokemonStatList(list: List<PokemonStat>?): String {
         return Gson().toJson(list)
     }
 }

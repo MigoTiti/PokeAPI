@@ -12,6 +12,7 @@ import com.lucasrodrigues.pokemonshowcase.BuildConfig
 import com.lucasrodrigues.pokemonshowcase.R
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.LoadingState
+import com.lucasrodrigues.pokemonshowcase.model.PokemonDetailed
 
 object BindingUtils {
 
@@ -40,6 +41,21 @@ object BindingUtils {
             .load(
                 if (displayPokemon != null)
                     "${BuildConfig.POKEMON_IMAGE_BASE_URL}${displayPokemon.number}.png"
+                else
+                    R.drawable.placeholder
+            )
+            .error(R.drawable.placeholder)
+            .placeholder(R.drawable.placeholder)
+            .into(view)
+    }
+
+    @JvmStatic
+    @BindingAdapter("pokemonIcon")
+    fun setPokemonIcon(view: ImageView, pokemon: PokemonDetailed?) {
+        Glide.with(view)
+            .load(
+                if (pokemon != null)
+                    "${BuildConfig.POKEMON_IMAGE_BASE_URL}${pokemon.pokemon.number}.png"
                 else
                     R.drawable.placeholder
             )

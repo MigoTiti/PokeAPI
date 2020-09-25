@@ -136,6 +136,8 @@ class PokemonRepository(
         )
 
         localDatabase.withTransaction {
+            pokemonDao.insertOrUpdatePokemonPreservingFavoriteFlag(pokemonWithIds.pokemon)
+
             details.forEach {
                 when (it) {
                     is Ability -> {
@@ -177,10 +179,6 @@ class PokemonRepository(
 
     suspend fun toggleFavoritePokemon(pokemon: DisplayPokemon) {
         toggleFavoritePokemon(pokemon.pokemonName)
-    }
-
-    private suspend fun insertPokemon(vararg pokemon: Pokemon) {
-        pokemonDao.insertOrUpdatePokemonPreservingFavoriteFlag(*pokemon)
     }
 
     private suspend fun toggleFavoritePokemon(name: String) {

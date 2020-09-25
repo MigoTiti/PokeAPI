@@ -7,5 +7,10 @@
     <string name="label_favorite_pokemon">Favorite Pokemon</string>
     <string name="label_search">Search</string>
     <string name="empty_favorite_list">No favorites added yet</string>
+    <string name="empty_sprite_list">No sprites found</string>
+    <string name="empty_stat_list">No stats found</string>
+    <string name="empty_move_list">No moves found</string>
+    <string name="empty_ability_list">No abilities found</string>
+    <string name="empty_type_list">No types found</string>
     <string name="title_favorites">Favorites</string>
 </resources>

@@ -7,6 +7,8 @@ import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Pokemon
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Type
 import com.lucasrodrigues.pokemonshowcase.extensions.toDisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
+import com.lucasrodrigues.pokemonshowcase.model.PokemonSprite
+import com.lucasrodrigues.pokemonshowcase.model.PokemonStat
 import com.lucasrodrigues.pokemonshowcase.model.PokemonWithIds
 import com.lucasrodrigues.pokemonshowcase.webservice.PokemonWebservice
 import kotlinx.coroutines.delay
@@ -24,10 +26,34 @@ class PokemonWebserviceTest : PokemonWebservice {
         Pokemon(
             pokemonName = "Pokemon $index",
             number = index,
-            sprites = listOf(),
-            height = index,
-            weight = index,
-            baseExperience = index,
+            sprites = listOf(
+                PokemonSprite(
+                    name = "front_default",
+                    url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                ),
+                PokemonSprite(
+                    name = "front_default",
+                    url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                ),
+                PokemonSprite(
+                    name = "front_default",
+                    url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                ),
+                PokemonSprite(
+                    name = "front_default",
+                    url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+                )
+            ),
+            height = Random.nextInt(index).toDouble() / 10,
+            weight = Random.nextInt(index).toDouble() / 10,
+            baseStats = listOf(
+                PokemonStat("hp", Random.nextInt(100)),
+                PokemonStat("attack", Random.nextInt(100)),
+                PokemonStat("defense", Random.nextInt(100)),
+                PokemonStat("special-attack", Random.nextInt(100)),
+                PokemonStat("special-defense", Random.nextInt(100)),
+                PokemonStat("speed", Random.nextInt(100)),
+            )
         )
     }
 
