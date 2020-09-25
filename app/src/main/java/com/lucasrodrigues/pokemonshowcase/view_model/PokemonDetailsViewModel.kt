@@ -24,14 +24,14 @@ class PokemonDetailsViewModel(
             loadingLiveData = fetchingPokemonState,
             showErrorAlert = false,
         ) {
-            pokemonRepository.fetchPokemon(pokemonName)
+            pokemonRepository.updatePokemon(pokemonName)
         }
     }
 
     fun toggleFavorite() {
         if (pokemonDetails.value != null)
             request {
-                pokemonRepository.toggleFavoritePokemon(pokemonDetails.value!!)
+                pokemonRepository.toggleFavoritePokemon(pokemonDetails.value!!.pokemon)
             }
     }
 }

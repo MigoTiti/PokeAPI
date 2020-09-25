@@ -11,7 +11,10 @@ object RepositoryDependencies {
         single {
             PokemonRepository(
                 pokemonDao = get(),
-                pokemonWebservice = get()
+                pokemonWebservice = get(),
+                abilityDao = get(),
+                moveDao = get(),
+                typeDao = get()
             )
         }
 

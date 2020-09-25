@@ -5,8 +5,8 @@ import androidx.room.withTransaction
 import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.data_access.local.LocalDatabase
 import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.RemoteKeysDao
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.RemoteKey
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
-import com.lucasrodrigues.pokemonshowcase.model.RemoteKey
 
 @ExperimentalPagingApi
 class RemoteKeysRepository(
@@ -19,7 +19,7 @@ class RemoteKeysRepository(
         database.withTransaction {
             val keys = pagedList.pokemon.map {
                 RemoteKey(
-                    pokemonName = it.name,
+                    pokemonName = it.pokemonName,
                     pokemonNumber = it.number,
                     previousKey = pagedList.previousOffset,
                     nextKey = pagedList.nextOffset

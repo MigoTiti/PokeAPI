@@ -2,7 +2,7 @@ package com.lucasrodrigues.pokemonshowcase.webservice
 
 import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
-import com.lucasrodrigues.pokemonshowcase.model.Pokemon
+import com.lucasrodrigues.pokemonshowcase.model.PokemonWithIds
 
 interface PokemonWebservice {
     suspend fun fetchAllPokemon(
@@ -11,5 +11,5 @@ interface PokemonWebservice {
         pageSize: Int
     ): PagedPokemonList
 
-    suspend fun searchPokemon(name: String): Pokemon
+    suspend fun searchPokemon(name: String): PokemonWithIds
 }

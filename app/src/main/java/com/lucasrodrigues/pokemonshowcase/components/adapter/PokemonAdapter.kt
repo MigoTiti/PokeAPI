@@ -30,7 +30,7 @@ class PokemonAdapter(
             }
         ) {
             if (item != null)
-                navigationService.navigateToPokemonDetails(item.name)
+                navigationService.navigateToPokemonDetails(item.pokemonName)
         }
 
         setAnimation(holder.itemView, position)

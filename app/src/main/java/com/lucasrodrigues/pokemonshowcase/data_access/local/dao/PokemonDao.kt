@@ -5,29 +5,31 @@ import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Pokemon
 import com.lucasrodrigues.pokemonshowcase.extensions.toPokemon
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
-import com.lucasrodrigues.pokemonshowcase.model.Pokemon
+import com.lucasrodrigues.pokemonshowcase.model.PokemonDetailed
 
 @Dao
 interface PokemonDao : BaseDao<Pokemon> {
 
-    @Query("SELECT name, number, is_favorite FROM Pokemon WHERE number >= :begin AND number <= :end ORDER BY number ASC")
+    @Query("SELECT pokemonName, number, isFavorite FROM Pokemon WHERE number >= :begin AND number <= :end ORDER BY number ASC")
     fun selectAllDisplayPokemonPagingSource(begin: Int, end: Int): PagingSource<Int, DisplayPokemon>
 
-    @Query("SELECT name, number, is_favorite FROM Pokemon WHERE is_favorite == 1 ORDER BY number ASC")
+    @Query("SELECT pokemonName, number, isFavorite FROM Pokemon WHERE isFavorite == 1 ORDER BY number ASC")
     fun getAllFavoritePokemon(): LiveData<List<DisplayPokemon>>
 
-    @Query("SELECT * FROM Pokemon WHERE name == :id")
-    fun selectPokemonByIdLiveData(id: String): LiveData<Pokemon>
+    @Transaction
+    @Query("SELECT * FROM Pokemon WHERE pokemonName == :id")
+    fun selectPokemonByIdLiveData(id: String): LiveData<PokemonDetailed>
 
-    @Query("SELECT * FROM Pokemon WHERE name == :nameQuery")
+    @Query("SELECT * FROM Pokemon WHERE pokemonName == :nameQuery")
     suspend fun selectPokemonUsingQuery(nameQuery: String): Pokemon?
 
-    @Query("SELECT * FROM Pokemon WHERE name == :id")
+    @Query("SELECT * FROM Pokemon WHERE pokemonName == :id")
     suspend fun selectPokemonById(id: String): Pokemon?
 
-    @Query("SELECT count(*) > 0 FROM Pokemon WHERE name == :name AND abilities != null")
+    @Query("SELECT count(*) > 0 FROM Pokemon WHERE pokemonName == :name AND height != null")
     suspend fun hasDetailedPokemon(name: String): Boolean
 
     @Transaction
@@ -49,7 +51,7 @@ interface PokemonDao : BaseDao<Pokemon> {
     @Transaction
     suspend fun insertOrUpdatePokemonPreservingFavoriteFlag(vararg pokemon: Pokemon) {
         pokemon.forEach {
-            val currentItem = selectPokemonById(it.name)
+            val currentItem = selectPokemonById(it.pokemonName)
 
             if (currentItem != null) {
                 update(it.copy(isFavorite = currentItem.isFavorite))
@@ -62,7 +64,7 @@ interface PokemonDao : BaseDao<Pokemon> {
     @Transaction
     suspend fun insertIfNotPresent(vararg pokemon: DisplayPokemon) {
         pokemon.forEach {
-            val currentItem = selectPokemonById(it.name)
+            val currentItem = selectPokemonById(it.pokemonName)
 
             if (currentItem == null) {
                 insert(it.toPokemon())

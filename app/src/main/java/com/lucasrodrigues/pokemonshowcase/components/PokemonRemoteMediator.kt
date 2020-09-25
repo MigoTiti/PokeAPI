@@ -5,8 +5,8 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.lucasrodrigues.pokemonshowcase.constants.Generation
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.RemoteKey
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
-import com.lucasrodrigues.pokemonshowcase.model.RemoteKey
 import com.lucasrodrigues.pokemonshowcase.repository.PokemonRepository
 import com.lucasrodrigues.pokemonshowcase.repository.RemoteKeysRepository
 import kotlin.math.max
@@ -81,7 +81,7 @@ class PokemonRemoteMediator(
             it.data.isNotEmpty()
         }?.data?.lastOrNull()
             ?.let { pokemon ->
-                remoteKeysRepository.getKeyByPokemonName(pokemon.name)
+                remoteKeysRepository.getKeyByPokemonName(pokemon.pokemonName)
                     ?: remoteKeysRepository.getLastKey(generation)
             }
     }
@@ -93,7 +93,7 @@ class PokemonRemoteMediator(
             it.data.isNotEmpty()
         }?.data?.firstOrNull()
             ?.let { pokemon ->
-                remoteKeysRepository.getKeyByPokemonName(pokemon.name)
+                remoteKeysRepository.getKeyByPokemonName(pokemon.pokemonName)
                     ?: remoteKeysRepository.getFirstKey(generation)
             }
     }
@@ -103,7 +103,7 @@ class PokemonRemoteMediator(
     ): RemoteKey? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.let { pokemon ->
-                remoteKeysRepository.getKeyByPokemonName(pokemon.name)
+                remoteKeysRepository.getKeyByPokemonName(pokemon.pokemonName)
                     ?: remoteKeysRepository.getFirstKey(generation)
             }
         }

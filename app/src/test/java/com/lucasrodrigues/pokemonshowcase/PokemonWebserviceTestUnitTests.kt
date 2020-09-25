@@ -1,8 +1,8 @@
 package com.lucasrodrigues.pokemonshowcase
 
 import com.lucasrodrigues.pokemonshowcase.constants.Generation
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Pokemon
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
-import com.lucasrodrigues.pokemonshowcase.model.Pokemon
 import com.lucasrodrigues.pokemonshowcase.webservice.PokemonWebservice
 import com.lucasrodrigues.pokemonshowcase.webservice.test.PokemonWebserviceTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

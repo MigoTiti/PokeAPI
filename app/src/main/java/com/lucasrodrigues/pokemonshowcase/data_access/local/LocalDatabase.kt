@@ -5,15 +5,22 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.PokemonDao
-import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.RemoteKeysDao
-import com.lucasrodrigues.pokemonshowcase.model.Pokemon
-import com.lucasrodrigues.pokemonshowcase.model.RemoteKey
+import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.*
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.*
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.relation.PokemonAbilityCrossRef
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.relation.PokemonMoveCrossRef
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.relation.PokemonTypeCrossRef
 import com.lucasrodrigues.pokemonshowcase.utils.DatabaseConverters
 
 @Database(
     entities = [
         Pokemon::class,
+        Type::class,
+        Ability::class,
+        Move::class,
+        PokemonAbilityCrossRef::class,
+        PokemonMoveCrossRef::class,
+        PokemonTypeCrossRef::class,
         RemoteKey::class
     ],
     version = 1,
@@ -48,4 +55,7 @@ abstract class LocalDatabase : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao
     abstract fun remoteKeyDao(): RemoteKeysDao
+    abstract fun abilityDao(): AbilityDao
+    abstract fun moveDao(): MoveDao
+    abstract fun typeDao(): TypeDao
 }

@@ -56,7 +56,7 @@ class PokemonDetailsActivity :
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewModel.pokemonDetails.observe(this) {
-            title = it?.name?.capitalize() ?: "Buscando '${viewModel.pokemonName}'"
+            title = it?.pokemon?.pokemonName?.capitalize() ?: "Buscando '${viewModel.pokemonName}'"
 
             invalidateOptionsMenu()
         }
@@ -66,7 +66,7 @@ class PokemonDetailsActivity :
         val inflater = menuInflater
         inflater.inflate(R.menu.pokemon_details_menu, menu)
 
-        val pokemon = viewModel.pokemonDetails.value
+        val pokemon = viewModel.pokemonDetails.value?.pokemon
 
         val item = menu?.findItem(R.id.action_toggle_favorite)
 

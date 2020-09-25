@@ -1,11 +1,11 @@
 package com.lucasrodrigues.pokemonshowcase.extensions
 
+import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Pokemon
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
-import com.lucasrodrigues.pokemonshowcase.model.Pokemon
 
 fun Pokemon.toDisplayPokemon(): DisplayPokemon {
     return DisplayPokemon(
-        name = name,
+        pokemonName = pokemonName,
         number = number,
         isFavorite = isFavorite
     )
@@ -13,7 +13,7 @@ fun Pokemon.toDisplayPokemon(): DisplayPokemon {
 
 fun DisplayPokemon.toPokemon(): Pokemon {
     return Pokemon(
-        name = name,
+        pokemonName = pokemonName,
         number = number
     )
 }
