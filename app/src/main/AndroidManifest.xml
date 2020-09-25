@@ -39,6 +39,11 @@
                 android:resource="@xml/searchable" />
         </activity>
 
+        <activity
+            android:label="@string/title_favorites"
+            android:name=".view.FavoritePokemonActivity"
+            android:screenOrientation="portrait" />
+
         <provider
             android:name="com.lucasrodrigues.pokemonshowcase.components.SuggestionProvider"
             android:authorities="com.lucasrodrigues.pokemonshowcase.SuggestionProvider" />

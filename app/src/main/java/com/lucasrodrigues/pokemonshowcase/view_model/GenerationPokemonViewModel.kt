@@ -14,7 +14,6 @@ import com.lucasrodrigues.pokemonshowcase.repository.PokemonRepository
 import com.lucasrodrigues.pokemonshowcase.repository.RemoteKeysRepository
 import kotlinx.coroutines.flow.Flow
 
-@ExperimentalPagingApi
 class GenerationPokemonViewModel(
     navigationService: NavigationService,
     alertService: AlertService,
@@ -25,6 +24,7 @@ class GenerationPokemonViewModel(
 
     val firstLoadState = MutableLiveData<LoadingState>(LoadingState.Idle)
 
+    @ExperimentalPagingApi
     fun getAllPokemon(): Flow<PagingData<DisplayPokemon>> {
         return pokemonRepository
             .allPokemonPagedList(remoteKeysRepository, generation)

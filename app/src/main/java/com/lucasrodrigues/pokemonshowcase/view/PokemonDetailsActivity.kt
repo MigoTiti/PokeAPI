@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.provider.SearchRecentSuggestions
 import android.view.Menu
 import android.view.MenuItem
-import androidx.paging.ExperimentalPagingApi
 import com.lucasrodrigues.pokemonshowcase.R
 import com.lucasrodrigues.pokemonshowcase.components.SuggestionProvider
 import com.lucasrodrigues.pokemonshowcase.databinding.ActivityPokemonDetailsBinding
@@ -16,7 +15,6 @@ import kotlinx.android.synthetic.main.component_error.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-@ExperimentalPagingApi
 class PokemonDetailsActivity :
     BaseActivity<ActivityPokemonDetailsBinding, PokemonDetailsViewModel>() {
 

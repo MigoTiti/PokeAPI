@@ -1,6 +1,5 @@
 package com.lucasrodrigues.pokemonshowcase.repository
 
-import androidx.paging.ExperimentalPagingApi
 import androidx.room.withTransaction
 import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.data_access.local.LocalDatabase
@@ -8,7 +7,6 @@ import com.lucasrodrigues.pokemonshowcase.data_access.local.dao.RemoteKeysDao
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.RemoteKey
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
 
-@ExperimentalPagingApi
 class RemoteKeysRepository(
     private val database: LocalDatabase,
     private val remoteKeysDao: RemoteKeysDao,

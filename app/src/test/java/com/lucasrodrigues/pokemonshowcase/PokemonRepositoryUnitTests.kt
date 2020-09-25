@@ -1,6 +1,5 @@
 package com.lucasrodrigues.pokemonshowcase
 
-import androidx.paging.ExperimentalPagingApi
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.lucasrodrigues.pokemonshowcase.data_access.local.LocalDatabase
@@ -16,7 +15,6 @@ import org.koin.dsl.module
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-@ExperimentalPagingApi
 @ExperimentalCoroutinesApi
 class PokemonRepositoryUnitTests : KoinTest {
 

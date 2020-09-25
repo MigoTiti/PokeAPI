@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.paging.ExperimentalPagingApi
 import com.lucasrodrigues.pokemonshowcase.framework.NavigationService
+import com.lucasrodrigues.pokemonshowcase.view.FavoritePokemonActivity
 import com.lucasrodrigues.pokemonshowcase.view.PokemonDetailsActivity
 import org.jetbrains.anko.clearTop
 import org.jetbrains.anko.newTask
@@ -14,7 +14,6 @@ import org.jetbrains.anko.singleTop
 import java.io.Serializable
 import java.lang.ref.WeakReference
 
-@ExperimentalPagingApi
 class NavigationServiceImpl(
     activity: Activity
 ) : NavigationService {
@@ -28,7 +27,7 @@ class NavigationServiceImpl(
     }
 
     override fun navigateToFavoritePokemon() {
-        TODO("Not yet implemented")
+        startActivity(FavoritePokemonActivity::class.java)
     }
 
     override fun goBack() {

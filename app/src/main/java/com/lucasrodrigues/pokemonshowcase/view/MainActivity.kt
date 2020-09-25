@@ -9,7 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.cursoradapter.widget.CursorAdapter
-import androidx.paging.ExperimentalPagingApi
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lucasrodrigues.pokemonshowcase.R
 import com.lucasrodrigues.pokemonshowcase.components.adapter.GenerationPokemonAdapter
@@ -19,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-@ExperimentalPagingApi
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override val viewModel by viewModel<MainViewModel> { parametersOf(this as Activity) }

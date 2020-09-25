@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-@ExperimentalPagingApi
 class GenerationPokemonFragment :
     BaseFragment<FragmentGenerationPokemonBinding, GenerationPokemonViewModel>() {
 
@@ -75,6 +74,7 @@ class GenerationPokemonFragment :
         }
     }
 
+    @ExperimentalPagingApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 

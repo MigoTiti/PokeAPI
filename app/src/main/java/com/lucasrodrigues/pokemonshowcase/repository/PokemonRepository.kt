@@ -26,7 +26,6 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 
-@ExperimentalPagingApi
 class PokemonRepository(
     private val pokemonDao: PokemonDao,
     private val abilityDao: AbilityDao,
@@ -46,6 +45,7 @@ class PokemonRepository(
         return pokemonDao.getAllFavoritePokemon()
     }
 
+    @ExperimentalPagingApi
     fun allPokemonPagedList(
         remoteKeysRepository: RemoteKeysRepository,
         generation: Generation

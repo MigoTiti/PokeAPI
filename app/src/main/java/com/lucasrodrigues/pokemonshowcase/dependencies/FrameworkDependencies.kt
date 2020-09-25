@@ -1,7 +1,6 @@
 package com.lucasrodrigues.pokemonshowcase.dependencies
 
 import android.app.Activity
-import androidx.paging.ExperimentalPagingApi
 import com.lucasrodrigues.pokemonshowcase.framework.AlertService
 import com.lucasrodrigues.pokemonshowcase.framework.NavigationService
 import com.lucasrodrigues.pokemonshowcase.framework.ResourceService
@@ -11,7 +10,6 @@ import com.lucasrodrigues.pokemonshowcase.framework.impl.ResourceServiceImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-@ExperimentalPagingApi
 object FrameworkDependencies {
     val module = module(override = true) {
         single<ResourceService> { ResourceServiceImpl(androidContext().applicationContext) }
