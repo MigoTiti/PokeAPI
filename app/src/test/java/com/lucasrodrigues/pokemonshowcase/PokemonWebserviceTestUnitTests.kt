@@ -1,8 +1,8 @@
 package com.lucasrodrigues.pokemonshowcase
 
 import com.lucasrodrigues.pokemonshowcase.constants.Generation
-import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Pokemon
 import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
+import com.lucasrodrigues.pokemonshowcase.model.PokemonWithIds
 import com.lucasrodrigues.pokemonshowcase.webservice.PokemonWebservice
 import com.lucasrodrigues.pokemonshowcase.webservice.test.PokemonWebserviceTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,7 +19,6 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 import org.koin.test.inject
-
 
 @ExperimentalCoroutinesApi
 class PokemonWebserviceTestUnitTests : KoinTest {
@@ -99,7 +98,7 @@ class PokemonWebserviceTestUnitTests : KoinTest {
 
     @Test
     fun searches_pokemonCorrectly() = runBlockingTest {
-        val pokemonResult: Pokemon? = pokemonWebservice.searchPokemon("pokemon1")
+        val pokemonResult: PokemonWithIds? = pokemonWebservice.searchPokemon("pokemon1")
 
         assertNotNull(pokemonResult)
     }
@@ -107,7 +106,6 @@ class PokemonWebserviceTestUnitTests : KoinTest {
     @Test
     fun failsToSearchPokemon() = runBlockingTest {
         exceptionRule.expect(Exception::class.java)
-        exceptionRule.expectMessage("Pokemon não encontrado")
 
         pokemonWebservice.searchPokemon("poke")
     }

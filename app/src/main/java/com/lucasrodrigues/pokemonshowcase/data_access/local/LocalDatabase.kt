@@ -58,4 +58,7 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun abilityDao(): AbilityDao
     abstract fun moveDao(): MoveDao
     abstract fun typeDao(): TypeDao
+    abstract fun pokemonAbilityDao(): PokemonAbilityDao
+    abstract fun pokemonMoveDao(): PokemonMoveDao
+    abstract fun pokemonTypeDao(): PokemonTypeDao
 }

@@ -55,20 +55,17 @@ class PokemonWebserviceTest : PokemonWebservice {
     private val pokemonWithIds = pokemon.map {
         PokemonWithIds(
             pokemon = it,
-            abilitiesIds = abilities.subList(
-                Random.nextInt(abilitySize - 1),
+            abilitiesIds = abilities.take(
                 Random.nextInt(abilitySize)
             ).map { ability ->
                 ability.abilityId
             },
-            typesIds = types.subList(
-                Random.nextInt(typeSize - 1),
+            typesIds = types.take(
                 Random.nextInt(typeSize)
             ).map { type ->
                 type.typeId
             },
-            movesIds = moves.subList(
-                Random.nextInt(moveSize - 1),
+            movesIds = moves.take(
                 Random.nextInt(moveSize)
             ).map { move ->
                 move.moveId
@@ -121,5 +118,44 @@ class PokemonWebserviceTest : PokemonWebservice {
         return pokemonWithIds.singleOrNull {
             it.pokemon.pokemonName == name
         } ?: throw Exception("Pokemon não encontrado")
+    }
+
+    override suspend fun fetchAbility(id: Int): Ability {
+        delay(500L)
+
+        val success = true
+
+        if (!success)
+            throw Exception("Exception 1")
+
+        return abilities.singleOrNull {
+            it.abilityId == id
+        } ?: throw Exception("Habilidade não encontrada")
+    }
+
+    override suspend fun fetchMove(id: Int): Move {
+        delay(500L)
+
+        val success = true
+
+        if (!success)
+            throw Exception("Exception 1")
+
+        return moves.singleOrNull {
+            it.moveId == id
+        } ?: throw Exception("Movimento não encontrado")
+    }
+
+    override suspend fun fetchType(id: Int): Type {
+        delay(500L)
+
+        val success = true
+
+        if (!success)
+            throw Exception("Exception 1")
+
+        return types.singleOrNull {
+            it.typeId == id
+        } ?: throw Exception("Tipo não encontrado")
     }
 }

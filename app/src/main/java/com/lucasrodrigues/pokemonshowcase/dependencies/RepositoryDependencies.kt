@@ -14,7 +14,11 @@ object RepositoryDependencies {
                 pokemonWebservice = get(),
                 abilityDao = get(),
                 moveDao = get(),
-                typeDao = get()
+                typeDao = get(),
+                localDatabase = get(),
+                pokemonAbilityDao = get(),
+                pokemonMoveDao = get(),
+                pokemonTypeDao = get()
             )
         }
 

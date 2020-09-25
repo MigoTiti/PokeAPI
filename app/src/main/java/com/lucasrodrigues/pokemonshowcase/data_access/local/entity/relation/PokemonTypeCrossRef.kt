@@ -5,7 +5,10 @@ import androidx.room.Entity
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(primaryKeys = ["pokemonName", "typeId"])
+@Entity(
+    primaryKeys = ["pokemonName", "typeId"],
+    indices = [androidx.room.Index(value = ["typeId"])]
+)
 data class PokemonTypeCrossRef(
     val pokemonName: String,
     val typeId: Int

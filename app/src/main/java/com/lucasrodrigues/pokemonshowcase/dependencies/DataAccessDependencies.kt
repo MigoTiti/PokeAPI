@@ -44,5 +44,8 @@ object DataAccessDependencies {
         single { get<LocalDatabase>().abilityDao() }
         single { get<LocalDatabase>().moveDao() }
         single { get<LocalDatabase>().typeDao() }
+        single { get<LocalDatabase>().pokemonAbilityDao() }
+        single { get<LocalDatabase>().pokemonMoveDao() }
+        single { get<LocalDatabase>().pokemonTypeDao() }
     }
 }
