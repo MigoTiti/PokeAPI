@@ -5,6 +5,7 @@ PokeApi showcase app made in Kotlin.
 ## Features
 
 * Pokémon listed by generation;
+* PokeAPI used to fetch Pokémon data, and Pokeres to fetch image;
 * Pagination with infinite scroll;
 * Dependency Injection; 
 * Offline first; 
@@ -41,6 +42,7 @@ Aplicativo de mostruário de Pokémon desenvolvido em Kotlin.
 ## Funcionalidades
 
 * Pokémon listados por geração;
+* PokeAPI usado para puxar os dados do Pokémon e Pokeres para puxar a imagem;
 * Paginação com scroll infinito; 
 * injeção de dependências; 
 * Offline First;
