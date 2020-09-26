@@ -18,9 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/motionLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layoutDescription="@xml/activity_pokemon_details_xml_constraintlayout_scene">
 
                 <ImageView
                     android:id="@+id/pokemonIcon"
@@ -244,7 +246,7 @@
                     app:layout_constraintTop_toBottomOf="@id/textView13"
                     tools:itemCount="10"
                     tools:listitem="@layout/item_pokemon_card" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.motion.widget.MotionLayout>
         </androidx.core.widget.NestedScrollView>
 
         <include

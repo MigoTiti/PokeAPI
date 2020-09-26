@@ -19,6 +19,7 @@ import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Ability
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Move
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Type
 import com.lucasrodrigues.pokemonshowcase.databinding.ActivityPokemonDetailsBinding
+import com.lucasrodrigues.pokemonshowcase.model.LoadingState
 import com.lucasrodrigues.pokemonshowcase.view_model.PokemonDetailsViewModel
 import kotlinx.android.synthetic.main.activity_pokemon_details.*
 import kotlinx.android.synthetic.main.component_error.*
@@ -150,6 +151,11 @@ class PokemonDetailsActivity :
             }
 
             setController(typeController)
+        }
+
+        viewModel.fetchingPokemonState.observe(this) {
+            if (it is LoadingState.Idle)
+                motionLayout.transitionToEnd()
         }
     }
 

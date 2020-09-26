@@ -15,7 +15,7 @@ class PokemonDetailsViewModel(
 
     val pokemonDetails = pokemonRepository.listenToPokemon(pokemonName)
 
-    val fetchingPokemonState = MutableLiveData<LoadingState>(LoadingState.Idle)
+    val fetchingPokemonState = MutableLiveData<LoadingState>()
 
     fun fetchPokemon() {
         request(
