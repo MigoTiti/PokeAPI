@@ -72,7 +72,7 @@ class PokemonRepository(
     suspend fun updatePokemon(name: String) {
         val newName = name.normalizeToQuery()
 
-        val hasDetailedPokemon = pokemonDao.hasDetailedPokemon(newName)
+        val hasDetailedPokemon = pokemonDao.selectPokemonById(newName)?.height != null
 
         if (!hasDetailedPokemon) {
             fetchPokemonDetails(newName)

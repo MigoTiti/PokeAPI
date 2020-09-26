@@ -34,9 +34,6 @@ interface PokemonDao : BaseDao<Pokemon> {
     @Query("SELECT * FROM Pokemon WHERE pokemonName == :id")
     suspend fun selectPokemonById(id: String): Pokemon?
 
-    @Query("SELECT count(*) > 0 FROM Pokemon WHERE pokemonName == :name AND height != null")
-    suspend fun hasDetailedPokemon(name: String): Boolean
-
     @Transaction
     suspend fun toggleFavoriteFlag(pokemon: Pokemon) {
         update(pokemon.copy(isFavorite = !pokemon.isFavorite))
