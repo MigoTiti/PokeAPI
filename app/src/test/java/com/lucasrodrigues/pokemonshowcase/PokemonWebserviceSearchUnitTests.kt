@@ -10,10 +10,22 @@ import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 import org.koin.test.inject
 
 @ExperimentalCoroutinesApi
-class PokemonWebserviceSearchUnitTests : BaseUnitTest() {
+@RunWith(Parameterized::class)
+class PokemonWebserviceSearchUnitTests(
+    private val queryString: String,
+    private val errorQueryString: String,
+) : BaseUnitTest() {
+
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters(name = "Query string: {0}, error query string: {1}")
+        fun data() = listOf(arrayOf("Pokemon 1", "poke"))
+    }
 
     @get:Rule
     val exceptionRule: ExpectedException = ExpectedException.none()
@@ -27,7 +39,7 @@ class PokemonWebserviceSearchUnitTests : BaseUnitTest() {
 
     @Test
     fun searches_pokemonCorrectly() = runBlockingTest {
-        val pokemonResult: PokemonWithIds? = pokemonWebservice.searchPokemon("Pokemon 1")
+        val pokemonResult: PokemonWithIds? = pokemonWebservice.searchPokemon(queryString)
 
         assertNotNull(pokemonResult)
     }
@@ -36,6 +48,6 @@ class PokemonWebserviceSearchUnitTests : BaseUnitTest() {
     fun failsToSearchPokemon() = runBlockingTest {
         exceptionRule.expect(Exception::class.java)
 
-        pokemonWebservice.searchPokemon("poke")
+        pokemonWebservice.searchPokemon(errorQueryString)
     }
 }

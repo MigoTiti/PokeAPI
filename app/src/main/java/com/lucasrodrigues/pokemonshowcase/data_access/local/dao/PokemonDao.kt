@@ -23,6 +23,10 @@ interface PokemonDao : BaseDao<Pokemon> {
     @Query("SELECT * FROM Pokemon WHERE pokemonName == :id")
     fun selectPokemonByIdLiveData(id: String): LiveData<PokemonDetailed>
 
+    @Transaction
+    @Query("SELECT * FROM Pokemon WHERE pokemonName == :id")
+    suspend fun selectPokemonDetailedById(id: String): PokemonDetailed?
+
     @Query("SELECT * FROM Pokemon WHERE pokemonName == :nameQuery")
     suspend fun selectPokemonUsingQuery(nameQuery: String): Pokemon?
 
