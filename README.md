@@ -13,7 +13,8 @@ PokeApi showcase app made in Kotlin.
 * Add/Remove/View Favorite Pokémon; 
 * Pokémon details;
 * MotionLayout animations;
-* Search for Pokémon.
+* Search for Pokémon;
+* Localized Strings;
 
 ## Architecture patterns
 
@@ -51,6 +52,7 @@ Aplicativo de mostruário de Pokémon desenvolvido em Kotlin.
 * Detalhes do Pokémon;
 * Animações com MotionLayout;
 * Busca de Pokémon;
+* Strings internacionalizadas;
 
 ## Padrões arquiteturais
 
