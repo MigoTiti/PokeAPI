@@ -61,44 +61,44 @@
             <KeyPosition
                 motion:framePosition="30"
                 motion:motionTarget="@+id/pokemonIcon"
-                motion:percentX="0.6"
-                motion:percentY="0.6" />
+                motion:percentX="0.8"
+                motion:percentY="0.8" />
 
             <KeyPosition
                 motion:framePosition="30"
                 motion:motionTarget="@+id/textView2"
-                motion:percentX="0.6"
-                motion:percentY="0.6" />
+                motion:percentX="0.8"
+                motion:percentY="0.8" />
 
             <KeyPosition
                 motion:framePosition="30"
                 motion:motionTarget="@+id/textView3"
-                motion:percentX="0.6"
-                motion:percentY="0.6" />
+                motion:percentX="0.8"
+                motion:percentY="0.8" />
 
             <KeyPosition
                 motion:framePosition="30"
                 motion:motionTarget="@+id/textView4"
-                motion:percentX="0.6"
-                motion:percentY="0.6" />
+                motion:percentX="0.8"
+                motion:percentY="0.8" />
 
             <KeyPosition
                 motion:framePosition="30"
                 motion:motionTarget="@+id/textView5"
-                motion:percentX="0.6"
-                motion:percentY="0.6" />
+                motion:percentX="0.8"
+                motion:percentY="0.8" />
 
             <KeyPosition
                 motion:framePosition="30"
                 motion:motionTarget="@+id/textView6"
-                motion:percentX="0.6"
-                motion:percentY="0.6" />
+                motion:percentX="0.8"
+                motion:percentY="0.8" />
 
             <KeyPosition
                 motion:framePosition="30"
                 motion:motionTarget="@+id/textView7"
-                motion:percentX="0.6"
-                motion:percentY="0.6" />
+                motion:percentX="0.8"
+                motion:percentY="0.8" />
 
             <KeyPosition
                 motion:framePosition="40"

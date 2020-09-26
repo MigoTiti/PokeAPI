@@ -1,4 +1,4 @@
-package com.lucasrodrigues.pokemonshowcase.webservice.test
+package com.lucasrodrigues.pokemonshowcase.webservice.impl
 
 import com.lucasrodrigues.pokemonshowcase.constants.Generation
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Ability
@@ -16,7 +16,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
-class PokemonWebserviceTest : PokemonWebservice {
+class PokemonWebserviceImpl : PokemonWebservice {
 
     private val abilitySize = 20
     private val typeSize = 10
