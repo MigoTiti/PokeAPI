@@ -20,11 +20,11 @@ The app was developed using MVVM as it's presentation pattern along with Reposit
 
 ## Technologies
 
-To manage and inject dependencies, the framework "Koin" was used. In data access, Retrofit is used to fetch network requests and Room is used as the single source of truth, being responsible to displaying all the data to the user through LiveData, together with Data Binding. To manage async requests, Kotlin Coroutines were used. To display the Pokémon generations, the Paging3 Jetpack component was used, as it works out-of-the-box with Room. To display the favorite list, Epoxy was used, as this list didn't require pagination. To draw the Pokémon details appear animation, the MotionLayout component was used. Lottie used to show Pikachu loading.
+To manage and inject dependencies, the framework "Koin" was used. In data access, Retrofit is used to fetch network requests and Room is used as the single source of truth, being responsible to display all the data to the user through LiveData, together with Data Binding. To manage async requests, Kotlin Coroutines were used. To display the Pokémon generations, the Paging3 Jetpack component was used, as it works out-of-the-box with Room. To display the favorite list, Epoxy was used, as this list didn't require pagination. To draw the Pokémon details appear animation, the MotionLayout component was used. Lottie used to show Pikachu loading.
 
 ## Database Structure
 
-The Pokémon Entity contains a many-to-many relations with Ability, Type and Move, and to optimize cache space, the choice was to structure the database relations rather than replicating the data inside Pokémon table.
+The Pokémon Entity contains many-to-many relations with Ability, Type and Move, and to optimize cache space, the choice was to structure the database relations rather than replicating the data inside Pokémon table.
 
 ## Data Mock
 
@@ -32,7 +32,7 @@ The data mock was achieved using Flavors and Dependency injection to separate un
 
 ## Unit Tests
 
-The unit tests were written to test the Webservice layer (between Repository and data acess layer) business logic, as it is the only layer that has external dependencies. 
+The unit tests were written to test the Webservice layer (between Repository and data access layer) business logic, as it is the only layer that has external dependencies. 
 
 # Desafio PokeApi (PT)
 
