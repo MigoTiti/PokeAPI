@@ -5,7 +5,7 @@ import com.lucasrodrigues.pokemonshowcase.dependencies.DataAccessDependencies
 import com.lucasrodrigues.pokemonshowcase.dependencies.WebserviceDependencies
 import com.lucasrodrigues.pokemonshowcase.webservice.PokemonWebservice
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -37,7 +37,7 @@ class PokemonWebserviceSingleGenerationUnitTests(
 
     @ExperimentalCoroutinesApi
     @Test
-    fun fetches_generationProgressivelyCorrectly() = runBlockingTest {
+    fun fetches_generationProgressivelyCorrectly() = runBlocking {
         val pageSize = 20
 
         var currentPage = pokemonWebservice.fetchAllPokemon(
@@ -64,7 +64,7 @@ class PokemonWebserviceSingleGenerationUnitTests(
 
     @ExperimentalCoroutinesApi
     @Test
-    fun fetches_completeGenerationCorrectly() = runBlockingTest {
+    fun fetches_completeGenerationCorrectly() = runBlocking {
         val pagedPokemonList = pokemonWebservice.fetchAllPokemon(
             generation = generation,
             generationRelativeOffset = 0,

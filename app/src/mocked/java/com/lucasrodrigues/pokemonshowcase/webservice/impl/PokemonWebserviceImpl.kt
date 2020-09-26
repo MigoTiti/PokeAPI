@@ -6,10 +6,7 @@ import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Move
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Pokemon
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Type
 import com.lucasrodrigues.pokemonshowcase.extensions.toDisplayPokemon
-import com.lucasrodrigues.pokemonshowcase.model.PagedPokemonList
-import com.lucasrodrigues.pokemonshowcase.model.PokemonSprite
-import com.lucasrodrigues.pokemonshowcase.model.PokemonStat
-import com.lucasrodrigues.pokemonshowcase.model.PokemonWithIds
+import com.lucasrodrigues.pokemonshowcase.model.*
 import com.lucasrodrigues.pokemonshowcase.webservice.PokemonWebservice
 import kotlinx.coroutines.delay
 import kotlin.math.max
@@ -78,24 +75,18 @@ class PokemonWebserviceImpl : PokemonWebservice {
         )
     }
 
-    private val pokemonWithIds = pokemon.map {
-        PokemonWithIds(
+    private val pokemonDetailed = pokemon.map {
+        PokemonDetailed(
             pokemon = it,
-            abilitiesIds = abilities.take(
+            abilities = abilities.take(
                 Random.nextInt(abilitySize)
-            ).map { ability ->
-                ability.abilityId
-            },
-            typesIds = types.take(
+            ),
+            types = types.take(
                 Random.nextInt(typeSize)
-            ).map { type ->
-                type.typeId
-            },
-            movesIds = moves.take(
+            ),
+            moves = moves.take(
                 Random.nextInt(moveSize)
-            ).map { move ->
-                move.moveId
-            },
+            ),
         )
     }
 
@@ -116,7 +107,7 @@ class PokemonWebserviceImpl : PokemonWebservice {
 
         val absoluteOffset = generationRelativeOffset + generationLowerBound
 
-        val result = pokemonWithIds.subList(absoluteOffset, generationUpperBound).take(pageSize)
+        val result = pokemonDetailed.subList(absoluteOffset, generationUpperBound).take(pageSize)
 
         return PagedPokemonList(
             previousOffset = if (absoluteOffset == generationLowerBound)
@@ -133,7 +124,7 @@ class PokemonWebserviceImpl : PokemonWebservice {
         )
     }
 
-    override suspend fun searchPokemon(name: String): PokemonWithIds {
+    override suspend fun searchPokemon(name: String): PokemonDetailed {
         delay(500L)
 
         val success = true
@@ -141,47 +132,8 @@ class PokemonWebserviceImpl : PokemonWebservice {
         if (!success)
             throw Exception("Exception 1")
 
-        return pokemonWithIds.singleOrNull {
+        return pokemonDetailed.singleOrNull {
             it.pokemon.pokemonName == name
         } ?: throw Exception("Pokemon não encontrado")
-    }
-
-    override suspend fun fetchAbility(id: Int): Ability {
-        delay(500L)
-
-        val success = true
-
-        if (!success)
-            throw Exception("Exception 1")
-
-        return abilities.singleOrNull {
-            it.abilityId == id
-        } ?: throw Exception("Habilidade não encontrada")
-    }
-
-    override suspend fun fetchMove(id: Int): Move {
-        delay(500L)
-
-        val success = true
-
-        if (!success)
-            throw Exception("Exception 1")
-
-        return moves.singleOrNull {
-            it.moveId == id
-        } ?: throw Exception("Movimento não encontrado")
-    }
-
-    override suspend fun fetchType(id: Int): Type {
-        delay(500L)
-
-        val success = true
-
-        if (!success)
-            throw Exception("Exception 1")
-
-        return types.singleOrNull {
-            it.typeId == id
-        } ?: throw Exception("Tipo não encontrado")
     }
 }

@@ -5,6 +5,10 @@
 
     <data>
 
+        <import
+            alias="StringExtensions"
+            type="com.lucasrodrigues.pokemonshowcase.extensions.StringExtensionsKt" />
+
         <variable
             name="item"
             type="com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon" />
@@ -45,7 +49,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="14dp"
             android:maxLines="1"
-            android:text="@{item.pokemonName}"
+            android:text="@{StringExtensions.normalizeToDisplay(item.pokemonName)}"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="12sp"

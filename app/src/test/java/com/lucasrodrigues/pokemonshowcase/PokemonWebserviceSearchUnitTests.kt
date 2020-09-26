@@ -2,10 +2,10 @@ package com.lucasrodrigues.pokemonshowcase
 
 import com.lucasrodrigues.pokemonshowcase.dependencies.DataAccessDependencies
 import com.lucasrodrigues.pokemonshowcase.dependencies.WebserviceDependencies
-import com.lucasrodrigues.pokemonshowcase.model.PokemonWithIds
+import com.lucasrodrigues.pokemonshowcase.model.PokemonDetailed
 import com.lucasrodrigues.pokemonshowcase.webservice.PokemonWebservice
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
@@ -24,7 +24,7 @@ class PokemonWebserviceSearchUnitTests(
     companion object {
         @JvmStatic
         @Parameterized.Parameters(name = "Query string: {0}, error query string: {1}")
-        fun data() = listOf(arrayOf("Pokemon 1", "poke"))
+        fun data() = listOf(arrayOf("Bulbasaur", "Bulba"))
     }
 
     @get:Rule
@@ -38,16 +38,18 @@ class PokemonWebserviceSearchUnitTests(
     )
 
     @Test
-    fun searches_pokemonCorrectly() = runBlockingTest {
-        val pokemonResult: PokemonWithIds? = pokemonWebservice.searchPokemon(queryString)
+    fun searches_pokemonCorrectly() = runBlocking {
+        val pokemonResult: PokemonDetailed = pokemonWebservice.searchPokemon(queryString)
 
         assertNotNull(pokemonResult)
     }
 
     @Test
-    fun failsToSearchPokemon() = runBlockingTest {
+    fun failsToSearchPokemon() = runBlocking {
         exceptionRule.expect(Exception::class.java)
 
         pokemonWebservice.searchPokemon(errorQueryString)
+
+        return@runBlocking
     }
 }

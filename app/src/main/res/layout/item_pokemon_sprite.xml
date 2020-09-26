@@ -5,6 +5,10 @@
 
     <data>
 
+        <import
+            alias="StringExtensions"
+            type="com.lucasrodrigues.pokemonshowcase.extensions.StringExtensionsKt" />
+
         <variable
             name="item"
             type="com.lucasrodrigues.pokemonshowcase.model.PokemonSprite" />
@@ -36,7 +40,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
             android:maxLines="1"
-            android:text="@{item.name}"
+            android:text="@{StringExtensions.normalizeToDisplay(item.name)}"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="12sp"

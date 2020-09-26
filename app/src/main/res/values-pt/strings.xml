@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mostruário Pokémon</string>
+    <string name="error_unknown">Erro desconhecido</string>
+    <string name="error_loading_data">Erro ao carregar dados</string>
+    <string name="label_try_again">Tente novamente</string>
+    <string name="label_favorite_pokemon">Pokémon favoritos</string>
+    <string name="label_search">Busca</string>
+    <string name="empty_favorite_list">Nenhum favorito adicionado</string>
+    <string name="empty_sprite_list">Nenhum sprite encontrado</string>
+    <string name="empty_stat_list">Nenhum status encontrado</string>
+    <string name="empty_move_list">Nenhum golpe encontrado</string>
+    <string name="empty_ability_list">Nenhuma habilidade encontrada</string>
+    <string name="empty_type_list">Nenhum tipo encontrado</string>
+    <string name="title_favorites">Favoritos</string>
+    <string name="generation_title">Geração %d</string>
+    <string name="searching">Buscando \'%s\'</string>
+    <string name="pokemon_number">Número</string>
+    <string name="pokemon_weight">Peso</string>
+    <string name="pokemon_height">Altura</string>
+    <string name="pokemon_sprites">Sprites</string>
+    <string name="pokemon_types">Tipos</string>
+    <string name="pokemon_stats">Status</string>
+    <string name="pokemon_abilities">Habilidades</string>
+    <string name="pokemon_moves">Golpes</string>
+
+</resources>

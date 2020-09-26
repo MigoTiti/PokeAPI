@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Pokemon Showcase</string>
+    <string name="app_name">Pokémon Showcase</string>
 
     <string name="error_unknown">Unknown error</string>
     <string name="error_loading_data">Error loading data</string>
     <string name="label_try_again">Try again</string>
-    <string name="label_favorite_pokemon">Favorite Pokemon</string>
+    <string name="label_favorite_pokemon">Favorite Pokémon</string>
     <string name="label_search">Search</string>
     <string name="empty_favorite_list">No favorites added yet</string>
     <string name="empty_sprite_list">No sprites found</string>
@@ -13,4 +13,14 @@
     <string name="empty_ability_list">No abilities found</string>
     <string name="empty_type_list">No types found</string>
     <string name="title_favorites">Favorites</string>
+    <string name="generation_title">Generation %d</string>
+    <string name="searching">Searching \'%s\'</string>
+    <string name="pokemon_number">Number</string>
+    <string name="pokemon_weight">Weight</string>
+    <string name="pokemon_height">Height</string>
+    <string name="pokemon_sprites">Sprites</string>
+    <string name="pokemon_types">Types</string>
+    <string name="pokemon_stats">Stats</string>
+    <string name="pokemon_abilities">Abilities</string>
+    <string name="pokemon_moves">Moves</string>
 </resources>

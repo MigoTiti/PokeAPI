@@ -2,6 +2,7 @@ package com.lucasrodrigues.pokemonshowcase.dependencies
 
 import com.lucasrodrigues.pokemonshowcase.BuildConfig
 import com.lucasrodrigues.pokemonshowcase.data_access.local.LocalDatabase
+import com.lucasrodrigues.pokemonshowcase.data_access.network.PokemonAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -36,6 +37,8 @@ object DataAccessDependencies {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
+
+        single { get<Retrofit>().create(PokemonAPI::class.java) }
 
         single { LocalDatabase.getInstance(androidContext().applicationContext) }
 

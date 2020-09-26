@@ -27,9 +27,11 @@ class PokemonDetailsViewModel(
     }
 
     fun toggleFavorite() {
-        if (pokemonDetails.value != null)
+        val pokemon = pokemonDetails.value
+
+        if (pokemon != null)
             request {
-                pokemonRepository.toggleFavoritePokemon(pokemonDetails.value!!.pokemon)
+                pokemonRepository.toggleFavoritePokemon(pokemon.pokemon)
             }
     }
 }

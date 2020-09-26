@@ -19,6 +19,7 @@ import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Ability
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Move
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Type
 import com.lucasrodrigues.pokemonshowcase.databinding.ActivityPokemonDetailsBinding
+import com.lucasrodrigues.pokemonshowcase.extensions.normalizeToDisplay
 import com.lucasrodrigues.pokemonshowcase.model.LoadingState
 import com.lucasrodrigues.pokemonshowcase.view_model.PokemonDetailsViewModel
 import kotlinx.android.synthetic.main.activity_pokemon_details.*
@@ -89,15 +90,16 @@ class PokemonDetailsActivity :
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewModel.pokemonDetails.observe(this) {
-            title = it?.pokemon?.pokemonName?.capitalize() ?: "Buscando '${viewModel.pokemonName}'"
+            title = it?.pokemon?.pokemonName?.normalizeToDisplay()
+                ?: resourceService.getString(R.string.searching, viewModel.pokemonName)
 
             invalidateOptionsMenu()
 
-            spriteController.setData(it.pokemon.sprites)
-            typeController.setData(it.types)
-            abilityController.setData(it.abilities)
-            moveController.setData(it.moves)
-            statController.setData(it.pokemon.baseStats)
+            spriteController.setData(it?.pokemon?.sprites)
+            typeController.setData(it?.types)
+            abilityController.setData(it?.abilities)
+            moveController.setData(it?.moves)
+            statController.setData(it?.pokemon?.baseStats)
         }
 
         pokemonSpriteRv.apply {

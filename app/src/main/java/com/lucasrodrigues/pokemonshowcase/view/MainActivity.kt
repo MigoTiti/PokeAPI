@@ -34,7 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         generationPager.isUserInputEnabled = false
 
         TabLayoutMediator(generationTabLayout, generationPager) { tab, position ->
-            tab.text = "Generation ${position + 1}"
+            tab.text = resourceService.getString(R.string.generation_title, position + 1)
         }.attach()
     }
 

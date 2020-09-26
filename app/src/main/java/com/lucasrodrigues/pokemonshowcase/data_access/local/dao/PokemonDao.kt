@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
 import com.lucasrodrigues.pokemonshowcase.data_access.local.entity.Pokemon
+import com.lucasrodrigues.pokemonshowcase.extensions.normalizeToQuery
 import com.lucasrodrigues.pokemonshowcase.extensions.toPokemon
 import com.lucasrodrigues.pokemonshowcase.model.DisplayPokemon
 import com.lucasrodrigues.pokemonshowcase.model.PokemonDetailed
@@ -21,7 +22,7 @@ interface PokemonDao : BaseDao<Pokemon> {
 
     @Transaction
     @Query("SELECT * FROM Pokemon WHERE pokemonName == :id")
-    fun selectPokemonByIdLiveData(id: String): LiveData<PokemonDetailed>
+    fun selectPokemonByIdLiveData(id: String): LiveData<PokemonDetailed?>
 
     @Transaction
     @Query("SELECT * FROM Pokemon WHERE pokemonName == :id")
@@ -43,7 +44,7 @@ interface PokemonDao : BaseDao<Pokemon> {
 
     @Transaction
     suspend fun toggleFavoriteFlag(name: String) {
-        val pokemon = selectPokemonById(name)
+        val pokemon = selectPokemonById(name.normalizeToQuery())
 
         if (pokemon != null)
             update(pokemon.copy(isFavorite = !pokemon.isFavorite))
@@ -55,7 +56,7 @@ interface PokemonDao : BaseDao<Pokemon> {
     @Transaction
     suspend fun insertOrUpdatePokemonPreservingFavoriteFlag(vararg pokemon: Pokemon) {
         pokemon.forEach {
-            val currentItem = selectPokemonById(it.pokemonName)
+            val currentItem = selectPokemonById(it.pokemonName.normalizeToQuery())
 
             if (currentItem != null) {
                 update(it.copy(isFavorite = currentItem.isFavorite))
@@ -68,7 +69,7 @@ interface PokemonDao : BaseDao<Pokemon> {
     @Transaction
     suspend fun insertIfNotPresent(vararg pokemon: DisplayPokemon) {
         pokemon.forEach {
-            val currentItem = selectPokemonById(it.pokemonName)
+            val currentItem = selectPokemonById(it.pokemonName.normalizeToQuery())
 
             if (currentItem == null) {
                 insert(it.toPokemon())

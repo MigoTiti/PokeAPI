@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 data class DisplayPokemon(
     val pokemonName: String,
     val number: Int,
-    val isFavorite: Boolean
+    val isFavorite: Boolean = false
 ) : Parcelable
