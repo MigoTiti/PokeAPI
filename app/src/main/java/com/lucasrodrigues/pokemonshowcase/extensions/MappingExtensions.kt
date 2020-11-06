@@ -63,6 +63,13 @@ fun Map<String, Any?>.toPokemonSpriteList(): List<PokemonSprite> {
     }
 }
 
+fun Pokemon.toDisplayPokemon(): DisplayPokemon {
+    return DisplayPokemon(
+        pokemonName = this.pokemonName,
+        number = this.number
+    )
+}
+
 fun PagedListData<DisplayItemData>.toPagedPokemonList(
     generation: Generation
 ): PagedPokemonList {
